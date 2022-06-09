@@ -1,9 +1,10 @@
 # DelosAqua
-[![Go Reference](https://pkg.go.dev/badge/golang.org/x/image.svg)](https://go.dev/) [![PHP Version](http://poser.pugx.org/phpunit/phpunit/require/php)](https://packagist.org/packages/phpunit/phpunit) [![ForTheBadge uses-html](http://ForTheBadge.com/images/badges/uses-html.svg)](http://ForTheBadge.com)
+[![Go Reference](https://pkg.go.dev/badge/golang.org/x/image.svg)](https://go.dev/) [![PHP Version](http://poser.pugx.org/phpunit/phpunit/require/php)](https://packagist.org/packages/phpunit/phpunit)
 
-Repository for Interview Test
+This repository purpose is to contain all interview test
 
-## Tech Stacks
-![foxdemo](https://github.com/foxdemo/foxdemo.github.io/blob/master/assets/images/avatar.png)
-![foxdemo](https://github.com/foxdemo/foxdemo.github.io/blob/master/assets/images/avatar.png)
+## Mini Logic
+[Mini Logic](linkurl) This is the answer folder for test with pdf document title **TECHNOLOGY-BE-ProblemSolvingQuestions-300522-0849**
 
+## Mini Project
+[Mini Project](linkurl) This is the answer folder for test with pdf document title **TECHNOLOGY-BackendTasks-200522-0638**
