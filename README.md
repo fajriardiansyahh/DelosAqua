@@ -1,5 +1,6 @@
 # DelosAqua
-[![Go Reference](https://pkg.go.dev/badge/golang.org/x/image.svg)](https://pkg.go.dev/golang.org/x/image)[![Go Reference](https://pkg.go.dev/badge/golang.org/x/image.svg)](https://pkg.go.dev/golang.org/x/image)
+[![Go Reference](https://pkg.go.dev/badge/golang.org/x/image.svg)](https://go.dev/) [![PHP Version](http://poser.pugx.org/phpunit/phpunit/require/php)](https://packagist.org/packages/phpunit/phpunit)
+
 Repository for Interview Test
 
 ## Tech Stacks
