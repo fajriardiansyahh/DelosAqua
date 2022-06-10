@@ -165,19 +165,19 @@ Question 3: no=3&arrayLength=1&array=[1,2,3] `
 			if len(new_array) == middleArrayIndex {
 
 			} else {
-				leftValue = leftValue + (int)new_array[i]
+				leftValue = leftValue + len(new_array)
 				count++
 			}
 		}
 
 		if rightValue == leftValue {
-			fmt.Fprintln("YES")
+			fmt.Println("YES")
 			return
-		}else {
-			fmt.Fprintln("NO")
+		} else {
+			fmt.Println("NO")
 			return
 		}
-		return
+
 	default:
 		http.Error(w, "Question did not found! Available question only for: 1, 2, & 3.", http.StatusNotFound)
 		return
