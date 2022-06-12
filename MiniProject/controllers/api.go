@@ -105,6 +105,26 @@ func Ponds_API(w http.ResponseWriter, r *http.Request) {
 
 	switch r.Method {
 	case http.MethodGet:
+		id := r.URL.Query().Get("id")
+		if id != "" {
+			ponds_id, err := strconv.Atoi(id)
+			if err != nil {
+				log.Println(err)
+				w.Header().Set("Status", fmt.Sprint(http.StatusInternalServerError))
+				return
+			}
+
+			jsonResp, err := json.Marshal(models.GetPonds_ID(w, ponds_id))
+			if err != nil {
+				log.Println(err)
+				w.Header().Set("Status", fmt.Sprint(http.StatusInternalServerError))
+				return
+			}
+
+			w.Write(jsonResp)
+			return
+		}
+
 		jsonResp, err := json.Marshal(models.GetPonds_All(w))
 		if err != nil {
 			log.Println(err)

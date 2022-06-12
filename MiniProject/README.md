@@ -4,7 +4,7 @@
 
 <details>
   <summary>Farm API!</summary>
-
+  
   **Resource URL**: api/v1/farms
 
   **Resource Information**:
@@ -237,141 +237,125 @@
     1. Without parameters.
       - Example URL Request: api/v1/ponds
       - Example Response Success:
-            {
-                "Status": 200,
-                "Message": "GetFarm_All",
-                "Data": [
-                    {
-                    "ID": 1,
-                    "Name": "Farm 1",
-                    "Description": {
-                        "String": "a",
-                        "Valid": true
-                    },
-                    "Thumbnails": {
-                        "String": "a",
-                        "Valid": true
-                    },
-                    "Created_at": {
-                        "String": "2022-06-11 15:41:41",
-                        "Valid": true
-                    },
-                    "Updated_at": {
-                        "String": "2022-06-08 15:44:45",
-                        "Valid": true
-                    },
-                    "Deleted_at": {
-                        "String": "",
-                        "Valid": false
-                    }
-                    },
-                    {
-                    "ID": 2,
-                    "Name": "Farm 2",
-                    "Description": {
-                        "String": "a",
-                        "Valid": true
-                    },
-                    "Thumbnails": {
-                        "String": "a",
-                        "Valid": true
-                    },
-                    "Created_at": {
-                        "String": "2022-06-11 15:41:41",
-                        "Valid": true
-                    },
-                    "Updated_at": {
-                        "String": "",
-                        "Valid": false
-                    },
-                    "Deleted_at": {
-                        "String": "",
-                        "Valid": false
-                    }
-                    },
-                    {
-                    "ID": 3,
-                    "Name": "test",
-                    "Description": {
-                        "String": "",
-                        "Valid": true
-                    },
-                    "Thumbnails": {
-                        "String": "test update",
-                        "Valid": true
-                    },
-                    "Created_at": {
-                        "String": "2022-06-12 11:34:52",
-                        "Valid": true
-                    },
-                    "Updated_at": {
-                        "String": "2022-06-12 04:48:45",
-                        "Valid": true
-                    },
-                    "Deleted_at": {
-                        "String": "",
-                        "Valid": false
-                    }
-                    },
-                    {
-                    "ID": 5,
-                    "Name": "test create from update",
-                    "Description": {
-                        "String": "",
-                        "Valid": true
-                    },
-                    "Thumbnails": {
-                        "String": "test create from update",
-                        "Valid": true
-                    },
-                    "Created_at": {
-                        "String": "2022-06-12 12:00:18",
-                        "Valid": true
-                    },
-                    "Updated_at": {
-                        "String": "",
-                        "Valid": false
-                    },
-                    "Deleted_at": {
-                        "String": "",
-                        "Valid": false
-                    }
-                    }
-                ]
+
+                {
+                    "Status": 200,
+                    "Message": "GetPonds_All",
+                    "Data": [
+                        {
+                            "ID": 1,
+                            "Farm_ID": 1,
+                            "Name": "Pond 1-1A",
+                            "Description": {
+                                "String": "",
+                                "Valid": true
+                            },
+                            "Thumbnails": {
+                                "String": "",
+                                "Valid": true
+                            },
+                            "Created_at": {
+                                "String": "2022-06-11 23:42:03",
+                                "Valid": true
+                            },
+                            "Updated_at": {
+                                "String": "",
+                                "Valid": false
+                            },
+                            "Deleted_at": {
+                                "String": "",
+                                "Valid": false
+                            }
+                        },
+                        {
+                            "ID": 2,
+                            "Farm_ID": 1,
+                            "Name": "Pond 1-1B",
+                            "Description": {
+                                "String": "",
+                                "Valid": true
+                            },
+                            "Thumbnails": {
+                                "String": "",
+                                "Valid": true
+                            },
+                            "Created_at": {
+                                "String": "2022-06-11 23:42:03",
+                                "Valid": true
+                            },
+                            "Updated_at": {
+                                "String": "",
+                                "Valid": false
+                            },
+                            "Deleted_at": {
+                                "String": "",
+                                "Valid": false
+                            }
+                        },
+                        {
+                            "ID": 7,
+                            "Farm_ID": 1,
+                            "Name": "test create from update",
+                            "Description": {
+                                "String": "",
+                                "Valid": true
+                            },
+                            "Thumbnails": {
+                                "String": "test create from update",
+                                "Valid": true
+                            },
+                            "Created_at": {
+                                "String": "2022-06-12 12:13:21",
+                                "Valid": true
+                            },
+                            "Updated_at": {
+                                "String": "",
+                                "Valid": false
+                            },
+                            "Deleted_at": {
+                                "String": "",
+                                "Valid": false
+                            }
+                        }
+                    ]
                 }
+
     2. With Parameters
       - Example URL Request: /api/v1/ponds?id=2
       - Example Response Success:
+
             {
                 "Status": 200,
-                "Message": "GetFarm_ID",
+                "Message": "GetPonds_ID",
                 "Data": [
                     {
-                    "ID": 2,
-                    "Name": "Farm 2",
-                    "Description": {
-                        "String": "a",
-                        "Valid": true
-                    },
-                    "Thumbnails": {
-                        "String": "a",
-                        "Valid": true
-                    },
-                    "Created_at": {
-                        "String": "2022-06-11 15:41:41",
-                        "Valid": true
-                    },
-                    "Updated_at": {
-                        "String": "",
-                        "Valid": false
-                    },
-                    "Deleted_at": {
-                        "String": "",
-                        "Valid": false
-                    }
+                        "ID": 2,
+                        "Farm_ID": 1,
+                        "Name": "Pond 1-1B",
+                        "Description": {
+                            "String": "",
+                            "Valid": true
+                        },
+                        "Thumbnails": {
+                            "String": "",
+                            "Valid": true
+                        },
+                        "Created_at": {
+                            "String": "2022-06-11 23:42:03",
+                            "Valid": true
+                        },
+                        "Updated_at": {
+                            "String": "",
+                            "Valid": false
+                        },
+                        "Deleted_at": {
+                            "String": "",
+                            "Valid": false
+                        }
                     }
                 ]
-                }
+            }
+
   </details>
   
   <details>

@@ -271,7 +271,7 @@ func GetPonds_All(w http.ResponseWriter) Response_Ponds {
 
 	return Response_Ponds{
 		Status:  http.StatusOK,
-		Message: "GetFarm_All",
+		Message: "GetPonds_All",
 		Data:    result,
 	}
 }
@@ -319,7 +319,7 @@ func GetPonds_ID(w http.ResponseWriter, id int) Response_Ponds {
 
 	return Response_Ponds{
 		Status:  http.StatusOK,
-		Message: "GetFarm_ID",
+		Message: "GetPonds_ID",
 		Data:    result,
 	}
 }
@@ -367,7 +367,7 @@ func GetPonds_Ref(reference string, ref_id int, w http.ResponseWriter) Response_
 
 	return Response_Ponds{
 		Status:  http.StatusOK,
-		Message: "GetFarm_ID",
+		Message: "GetPonds_Ref",
 		Data:    result,
 	}
 }
