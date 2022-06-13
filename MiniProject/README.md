@@ -164,9 +164,9 @@
     - Example Body:
 
             {
-                name: "Test Name",
-                description: "Test Description",
-                thumbnails: "Test Thumbnails"
+                "Name":"Farm Name 2",
+                "Description":"Description Farm Name 2",
+                "Thumbnails":"Thumbnails Farm Name 2"
             }
 
     - Example Response Duplicate:
@@ -193,9 +193,10 @@
     - Example Body:
 
             {
-                name: "Test Name",
-                description: "Test Description",
-                thumbnails: "Test Thumbnails"
+                "ID": 2,
+                "Name":"Updating Farm Name 2",
+                "Description":"Updating Description Farm Name 2",
+                "Thumbnails":"Updating Thumbnails Farm Name 2"
             }
 
     - Example Response Duplicate:
@@ -230,7 +231,7 @@
     - Example Body:
 
             {
-                id: 1,
+                "ID": 2
             }
 
     - Example Response Success:
@@ -386,9 +387,10 @@
     - Example Body:
 
             {
-                name: "Test Name",
-                description: "Test Description",
-                thumbnails: "Test Thumbnails"
+                "Farm_ID": 2,
+                "Name":"Ponds Name 2",
+                "Description":"Description Pond Name 2",
+                "Thumbnails":"Thumbnails Pond Name 2"
             }
 
     - Example Response Duplicate:
@@ -415,9 +417,11 @@
     - Example Body:
 
             {
-                name: "Test Name",
-                description: "Test Description",
-                thumbnails: "Test Thumbnails"
+                "ID": 2,
+                "Farm_ID": 2,
+                "Name":"Updating Ponds Name 2",
+                "Description":"Updating Description Pond Name 2",
+                "Thumbnails":"Updating Thumbnails Pond Name 2"
             }
 
     - Example Response Duplicate:
@@ -452,7 +456,7 @@
     - Example Body:
 
             {
-                id: 1,
+                "ID": 2
             }
 
     - Example Response Success:
