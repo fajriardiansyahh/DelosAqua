@@ -1,5 +1,20 @@
+{{ template "apps" .}}
+{{ template "content" .}}
+
 {{ define "models" }}
 
-<h1>Test Models</h1>
-
+    {{ range .Data }}
+        <h1>Farm {{ .Name }}</h1>
+        <div class="row m-0">
+            <div class="col">
+                <img src="https://foodtank.com/wp-content/uploads/2020/04/COVID-19-Relief_Small-Farms-.jpg" height="128" class="card-img-top bg-secondary" alt="...">
+                
+            </div>
+            <div class="col">
+                <h2>Description: {{ .Description }}</h2>
+                <h2>Thumbnails: {{ .Thumbnails }}</h2>
+                <h2>Created: {{ .Created_at.String }}</h2>
+            </div>
+        </div>
+    {{ end }}
 {{ end }}

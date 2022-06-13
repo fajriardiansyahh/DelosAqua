@@ -9,8 +9,13 @@ import (
 	"strconv"
 )
 
+type JSONBody struct {
+	Data map[string]string
+}
+
+// A function to handle API method such as: GET, POST, PUT, DELETE for Farm Model
 func Farms_API(w http.ResponseWriter, r *http.Request) {
-	log.Println(r.URL.Path)
+	log.Println(r.URL.Path + r.URL.RawQuery)
 	w.Header().Set("Content-Type", "application/json")
 	accept := r.Header.Get("Accept")
 	contentType := r.Header.Get("Content-Type")
@@ -23,6 +28,7 @@ func Farms_API(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 
 	switch r.Method {
+
 	case http.MethodGet:
 		id := r.URL.Query().Get("id")
 		if id != "" {
@@ -40,7 +46,7 @@ func Farms_API(w http.ResponseWriter, r *http.Request) {
 				http.Error(w, models.GetFarm_All(w).Message, models.GetFarm_All(w).Status)
 				return
 			}
-
+			models.Create_API(r.Method, r.URL.Path+r.URL.RawQuery, r.Host, r.UserAgent(), w)
 			w.Write(jsonResp)
 			return
 		}
@@ -53,36 +59,63 @@ func Farms_API(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
+		models.Create_API(r.Method, r.URL.Path+r.URL.RawQuery, r.Host, r.UserAgent(), w)
 		w.Write(jsonResp)
 
 	case http.MethodPost:
-		jsonResp, err := json.Marshal(models.CreateFarm("API Test", "API Test Description", "API Test Thumbnails", w))
+		body := models.Farm{}
+		err := json.NewDecoder(r.Body).Decode(&body)
+		if err != nil {
+			panic(err.Error())
+		}
+
+		result := models.CreateFarm(body.Name, body.Description, body.Thumbnails, w)
+		jsonResp, err := json.Marshal(result)
 		if err != nil {
 			log.Println(err)
 			w.Header().Set("Status", fmt.Sprint(http.StatusInternalServerError))
 			http.Error(w, models.GetFarm_All(w).Message, models.GetFarm_All(w).Status)
+			w.Write([]byte(err.Error()))
 			return
 		}
+
+		models.Create_API(r.Method, r.URL.Path+r.URL.RawQuery, r.Host, r.UserAgent(), w)
 		w.Write(jsonResp)
 
 	case http.MethodPut:
-		jsonResp, err := json.Marshal(models.UpdateFarm(4, "test create from update", "test create from update", "", w))
+		body := models.Farm{}
+		err := json.NewDecoder(r.Body).Decode(&body)
+		if err != nil {
+			panic(err.Error())
+		}
+		result := models.UpdateFarm(body.ID, body.Name, body.Description, body.Thumbnails, w)
+		jsonResp, err := json.Marshal(result)
 		if err != nil {
 			log.Println(err)
 			w.Header().Set("Status", fmt.Sprint(http.StatusInternalServerError))
 			http.Error(w, models.GetFarm_All(w).Message, models.GetFarm_All(w).Status)
 			return
 		}
+
+		models.Create_API(r.Method, r.URL.Path+r.URL.RawQuery, r.Host, r.UserAgent(), w)
 		w.Write(jsonResp)
 
 	case http.MethodDelete:
-		jsonResp, err := json.Marshal(models.DeleteFarm(3, w))
+		body := models.Farm{}
+		err := json.NewDecoder(r.Body).Decode(&body)
+		if err != nil {
+			panic(err.Error())
+		}
+
+		jsonResp, err := json.Marshal(models.DeleteFarm(body.ID, w))
 		if err != nil {
 			log.Println(err)
 			w.Header().Set("Status", fmt.Sprint(http.StatusInternalServerError))
 			http.Error(w, models.GetFarm_All(w).Message, models.GetFarm_All(w).Status)
 			return
 		}
+
+		models.Create_API(r.Method, r.URL.Path+r.URL.RawQuery, r.Host, r.UserAgent(), w)
 		w.Write(jsonResp)
 
 	default:
@@ -90,8 +123,9 @@ func Farms_API(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// A function to handle API method such as: GET, POST, PUT, DELETE for Ponds Model
 func Ponds_API(w http.ResponseWriter, r *http.Request) {
-	log.Println(r.URL.Path)
+	log.Println(r.URL.Path + r.URL.RawQuery)
 	w.Header().Set("Content-Type", "application/json")
 	accept := r.Header.Get("Accept")
 	contentType := r.Header.Get("Content-Type")
@@ -104,6 +138,7 @@ func Ponds_API(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 
 	switch r.Method {
+
 	case http.MethodGet:
 		id := r.URL.Query().Get("id")
 		if id != "" {
@@ -121,6 +156,7 @@ func Ponds_API(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 
+			models.Create_API(r.Method, r.URL.Path+r.URL.RawQuery, r.Host, r.UserAgent(), w)
 			w.Write(jsonResp)
 			return
 		}
@@ -132,36 +168,62 @@ func Ponds_API(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, models.GetFarm_All(w).Message, models.GetFarm_All(w).Status)
 			return
 		}
+
+		models.Create_API(r.Method, r.URL.Path+r.URL.RawQuery, r.Host, r.UserAgent(), w)
 		w.Write(jsonResp)
 
 	case http.MethodPost:
-		jsonResp, err := json.Marshal(models.CreatePonds(1, "test", "test", "", w))
+		body := models.Ponds{}
+		err := json.NewDecoder(r.Body).Decode(&body)
+		if err != nil {
+			panic(err.Error())
+		}
+
+		jsonResp, err := json.Marshal(models.CreatePonds(body.Farm_ID, body.Name, body.Description, body.Thumbnails, w))
 		if err != nil {
 			log.Println(err)
 			w.Header().Set("Status", fmt.Sprint(http.StatusInternalServerError))
 			http.Error(w, models.GetFarm_All(w).Message, models.GetFarm_All(w).Status)
 			return
 		}
+
+		models.Create_API(r.Method, r.URL.Path+r.URL.RawQuery, r.Host, r.UserAgent(), w)
 		w.Write(jsonResp)
 
 	case http.MethodPut:
-		jsonResp, err := json.Marshal(models.UpdatePonds(4, 1, "test create from update", "test create from update", "", w))
+		body := models.Ponds{}
+		err := json.NewDecoder(r.Body).Decode(&body)
+		if err != nil {
+			panic(err.Error())
+		}
+
+		jsonResp, err := json.Marshal(models.UpdatePonds(body.ID, body.Farm_ID, body.Name, body.Description, body.Thumbnails, w))
 		if err != nil {
 			log.Println(err)
 			w.Header().Set("Status", fmt.Sprint(http.StatusInternalServerError))
 			http.Error(w, models.GetFarm_All(w).Message, models.GetFarm_All(w).Status)
 			return
 		}
+
+		models.Create_API(r.Method, r.URL.Path+r.URL.RawQuery, r.Host, r.UserAgent(), w)
 		w.Write(jsonResp)
 
 	case http.MethodDelete:
-		jsonResp, err := json.Marshal(models.DeletePonds(3, w))
+		body := models.Ponds{}
+		err := json.NewDecoder(r.Body).Decode(&body)
+		if err != nil {
+			panic(err.Error())
+		}
+
+		jsonResp, err := json.Marshal(models.DeletePonds(body.ID, w))
 		if err != nil {
 			log.Println(err)
 			w.Header().Set("Status", fmt.Sprint(http.StatusInternalServerError))
 			http.Error(w, models.GetFarm_All(w).Message, models.GetFarm_All(w).Status)
 			return
 		}
+
+		models.Create_API(r.Method, r.URL.Path+r.URL.RawQuery, r.Host, r.UserAgent(), w)
 		w.Write(jsonResp)
 
 	default:

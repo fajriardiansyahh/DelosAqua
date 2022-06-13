@@ -3,29 +3,33 @@ package models
 import (
 	"database/sql"
 	"log"
+	"miniproject/resources/helpers"
 	"net/http"
 	"time"
 )
 
+// Struct as a container to the representative table on the DB
 type Ponds struct {
 	ID          int
 	Farm_ID     int
 	Name        string
-	Description sql.NullString
-	Thumbnails  sql.NullString
+	Description string
+	Thumbnails  string
 	Created_at  sql.NullString
 	Updated_at  sql.NullString
 	Deleted_at  sql.NullString
 }
 
+// Struct as a store to contain the response from function on Ponds Models
 type Response_Ponds struct {
 	Status  int
 	Message string
 	Data    []Ponds
 }
 
+// Function to store Ponds data into Database
 func CreatePonds(farm_id int, name string, description string, thumbnails string, w http.ResponseWriter) Response_Ponds {
-	connecting, err := connection(w)
+	connecting, err := helpers.Connection(w)
 	if err != nil {
 		log.Println(err.Error())
 		w.WriteHeader(http.StatusInternalServerError)
@@ -71,8 +75,9 @@ func CreatePonds(farm_id int, name string, description string, thumbnails string
 	}
 }
 
+// Function to updating Ponds data into Database
 func UpdatePonds(id int, farm_id int, name string, description string, thumbnails string, w http.ResponseWriter) Response_Ponds {
-	connecting, err := connection(w)
+	connecting, err := helpers.Connection(w)
 	if err != nil {
 		log.Println(err.Error())
 		w.WriteHeader(http.StatusInternalServerError)
@@ -152,8 +157,9 @@ func UpdatePonds(id int, farm_id int, name string, description string, thumbnail
 	}
 }
 
+// Function to soft deleting Ponds data into Database
 func DeletePonds(id int, w http.ResponseWriter) Response_Ponds {
-	connecting, err := connection(w)
+	connecting, err := helpers.Connection(w)
 	if err != nil {
 		log.Println(err.Error())
 		w.WriteHeader(http.StatusInternalServerError)
@@ -164,26 +170,6 @@ func DeletePonds(id int, w http.ResponseWriter) Response_Ponds {
 		}
 	}
 	defer connecting.Close()
-	data_check, err := connecting.Query("SELECT * FROM ponds WHERE id=?", id)
-	if err != nil {
-		if err == sql.ErrNoRows {
-			log.Println(err.Error())
-			w.WriteHeader(http.StatusNotFound)
-			return Response_Ponds{
-				Status:  http.StatusNotFound,
-				Message: err.Error(),
-				Data:    []Ponds{},
-			}
-		}
-		log.Println(err.Error())
-		w.WriteHeader(http.StatusInternalServerError)
-		return Response_Ponds{
-			Status:  http.StatusInternalServerError,
-			Message: err.Error(),
-			Data:    []Ponds{},
-		}
-	}
-	defer data_check.Close()
 
 	data, err := connecting.Query("UPDATE ponds SET deleted_at=? WHERE id=?", time.Now(), id)
 	if err != nil {
@@ -229,8 +215,9 @@ func DeletePonds(id int, w http.ResponseWriter) Response_Ponds {
 	}
 }
 
+// Function to get all Ponds record data from Database
 func GetPonds_All(w http.ResponseWriter) Response_Ponds {
-	connecting, err := connection(w)
+	connecting, err := helpers.Connection(w)
 	if err != nil {
 		log.Println(err.Error())
 		w.WriteHeader(http.StatusInternalServerError)
@@ -269,6 +256,7 @@ func GetPonds_All(w http.ResponseWriter) Response_Ponds {
 		result = append(result, ponds)
 	}
 
+	w.WriteHeader(http.StatusOK)
 	return Response_Ponds{
 		Status:  http.StatusOK,
 		Message: "GetPonds_All",
@@ -276,8 +264,9 @@ func GetPonds_All(w http.ResponseWriter) Response_Ponds {
 	}
 }
 
+// Function to get Pond record data from Database by their ID
 func GetPonds_ID(w http.ResponseWriter, id int) Response_Ponds {
-	connecting, err := connection(w)
+	connecting, err := helpers.Connection(w)
 	if err != nil {
 		log.Println(err.Error())
 		w.WriteHeader(http.StatusInternalServerError)
@@ -324,8 +313,9 @@ func GetPonds_ID(w http.ResponseWriter, id int) Response_Ponds {
 	}
 }
 
+// Function to get all Ponds record data from Database by farm_id
 func GetPonds_Ref(reference string, ref_id int, w http.ResponseWriter) Response_Ponds {
-	connecting, err := connection(w)
+	connecting, err := helpers.Connection(w)
 	if err != nil {
 		log.Println(err.Error())
 		w.WriteHeader(http.StatusInternalServerError)
