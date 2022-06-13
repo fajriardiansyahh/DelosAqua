@@ -468,7 +468,93 @@
             }
 
   </details>
-</details>
+
+  <details>
+   <summary>API Analyst</summary>
+    **Resource URL**: api/v1/farms
+
+    **Resource Information**:
+     1. Reponse Format: JSON
+     2. Requires Authentication: No
+     3. Rate Limited: No
+
+     <details>
+      <summary>GET Methods</summary>
+       - Example URL Request: /api/v1/api_analyst
+       - Example Response Success:
+
+            {
+                "Status": 200,
+                "Message": "GetAPI_All",
+                "Data": [
+                    {
+                        "Method": "DELETE",
+                        "Path": "/api/v1/farms",
+                        "Count": "2",
+                        "UA": "Client (https://www.thunderclient.com)"
+                    },
+                    {
+                        "Method": "DELETE",
+                        "Path": "/api/v1/ponds",
+                        "Count": "1",
+                        "UA": "Thunder Client (https://www.thunderclient.com)"
+                    },
+                    {
+                        "Method": "GET",
+                        "Path": "/api/v1/api_analyst",
+                        "Count": "3",
+                        "UA": "Thunder Client (https://www.thunderclient.com)"
+                    },
+                    {
+                        "Method": "GET",
+                        "Path": "/api/v1/farms",
+                        "Count": "1",
+                        "UA": "Thunder Client (https://www.thunderclient.com)"
+                    },
+                    {
+                        "Method": "GET",
+                        "Path": "/api/v1/ponds",
+                        "Count": "2",
+                        "UA": "Client (https://www.thunderclient.com)"
+                    },
+                    {
+                        "Method": "GET",
+                        "Path": "/api/v1/ponds",
+                        "Count": "1",
+                        "UA": "Thunder Client (https://www.thunderclient.com)"
+                    },
+                    {
+                        "Method": "POST",
+                        "Path": "/api/v1/farms",
+                        "Count": "3",
+                        "UA": "Thunder Client (https://www.thunderclient.com)"
+                    },
+                    {
+                        "Method": "POST",
+                        "Path": "/api/v1/ponds",
+                        "Count": "3",
+                        "UA": "Thunder Client (https://www.thunderclient.com)"
+                    },
+                    {
+                        "Method": "PUT",
+                        "Path": "/api/v1/farms",
+                        "Count": "3",
+                        "UA": "Thunder Client (https://www.thunderclient.com)"
+                    },
+                    {
+                        "Method": "PUT",
+                        "Path": "/api/v1/ponds",
+                        "Count": "2",
+                        "UA": "Thunder Client (https://www.thunderclient.com)"
+                    }
+                ]
+            }
+
+     </details>
+
+  </details>
+
+ </details>
 
 </details>
 
@@ -479,7 +565,7 @@ MySQL
 ### Setup:
 1. Download and Install XAMPP / MySQL
 2. Make sure there is no database with name "delosaqua"
-2. Upload sql File in folder resources/databases
+2. Import sql File in folder resources/databases into MySQL
 3. Make sure all Environtment in .env file for your database system
 
 ### Running:

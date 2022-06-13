@@ -19,6 +19,7 @@ func main() {
 
 	mux.HandleFunc("/api/v1/farms", controllers.Farms_API)
 	mux.HandleFunc("/api/v1/ponds", controllers.Ponds_API)
+	mux.HandleFunc("/api/v1/api_analyst", controllers.APIAnalyst_API)
 
 	log.Println("Starting Web Server at port: 9090")
 

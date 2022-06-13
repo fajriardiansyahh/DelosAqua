@@ -16,6 +16,14 @@ type API struct {
 	Created_at string
 }
 
+type Analyst struct {
+	Method            string
+	Path              string
+	Count             string
+	UA                string
+	unique_user_agent string
+}
+
 // Struct as a store to contain the response from function on API Models
 type Response_API struct {
 	// Status is a representation to determine if the function succeeded or not
@@ -23,6 +31,12 @@ type Response_API struct {
 	// Message to serve the explanation about what is going on
 	Message string
 	Data    []API
+}
+
+type Response_APIAnalyst struct {
+	Status  int
+	Message string
+	Data    []Analyst
 }
 
 // Function to store API data into Database
@@ -83,49 +97,49 @@ func HardDelete_API(id int) Response_API {
 }
 
 // Function to get all API record data from Database
-func GetAPI_All(w http.ResponseWriter) Response_API {
+func GetAPI_All(w http.ResponseWriter) Response_APIAnalyst {
 	connecting, err := helpers.Connection(w)
 	if err != nil {
 		log.Println(err.Error())
 		w.WriteHeader(http.StatusInternalServerError)
-		return Response_API{
+		return Response_APIAnalyst{
 			Status:  http.StatusInternalServerError,
 			Message: err.Error(),
-			Data:    []API{},
+			Data:    []Analyst{},
 		}
 	}
 	defer connecting.Close()
 
-	data, err := connecting.Query("SELECT * FROM `api`")
+	data, err := connecting.Query("SELECT method, path, COUNT(path), ua, COUNT(ua) FROM api GROUP BY method, path, ua;")
 	if err != nil {
 		log.Println(err.Error())
 		w.WriteHeader(http.StatusInternalServerError)
-		return Response_API{
+		return Response_APIAnalyst{
 			Status:  http.StatusInternalServerError,
 			Message: err.Error(),
-			Data:    []API{},
+			Data:    []Analyst{},
 		}
 	}
 	defer data.Close()
 
-	var result []API
+	var result []Analyst
 	for data.Next() {
-		var api = API{}
-		var err = data.Scan(&api.ID, &api.Method, &api.Host, &api.Path, &api.UA, &api.Created_at)
+		var api = Analyst{}
+		var err = data.Scan(&api.Method, &api.Path, &api.Count, &api.UA, &api.unique_user_agent)
 		if err != nil {
 			log.Println(err.Error())
 			w.WriteHeader(http.StatusInternalServerError)
-			return Response_API{
+			return Response_APIAnalyst{
 				Status:  http.StatusInternalServerError,
 				Message: err.Error(),
-				Data:    []API{},
+				Data:    []Analyst{},
 			}
 		}
 		result = append(result, api)
 	}
 
 	w.WriteHeader(http.StatusOK)
-	return Response_API{
+	return Response_APIAnalyst{
 		Status:  http.StatusOK,
 		Message: "GetAPI_All",
 		Data:    result,

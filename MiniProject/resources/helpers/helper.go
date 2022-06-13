@@ -3,6 +3,7 @@ package helpers
 import (
 	"database/sql"
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"time"
@@ -31,4 +32,29 @@ func Connection(w http.ResponseWriter) (*sql.DB, error) {
 	connection.SetMaxIdleConns(10)
 
 	return connection, nil
+}
+
+func API_Handler(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.URL.Path + r.URL.RawQuery)
+	w.Header().Set("Content-Type", "application/json")
+	accept := r.Header.Get("Accept")
+	contentType := r.Header.Get("Content-Type")
+	if accept != "application/json" || contentType != "application/json" {
+		msg := "Content-Type / Accept header is not application/json"
+		http.Error(w, msg, http.StatusUnsupportedMediaType)
+		return
+	}
+	r.Body = http.MaxBytesReader(w, r.Body, 1048576)
+	r.ParseForm()
+}
+
+func API_Responses(data any, w http.ResponseWriter, r *http.Request) {
+	jsonResp, err := json.Marshal(data)
+	if err != nil {
+		log.Println(err)
+		w.Header().Set("Status", fmt.Sprint(http.StatusInternalServerError))
+		return
+	}
+
+	w.Write(jsonResp)
 }
