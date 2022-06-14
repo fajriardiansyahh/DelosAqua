@@ -577,10 +577,23 @@ MySQL
 ## Application System
 Go-lang
 
-### Preparing:
+### Setup:
 1. Download and Install Go
 2. Open Terminal
 3. Go to this MiniProject folder
-4. type command go run main.go
+
+### Running System
+4. type command in your terminal at the MiniProject folder "go run main.go"
+
+## Unit Test
+Go-lang
+
+### Description
+This unit test will be doing all the API Test for Farm, Ponds, Analytical API covered all method for Farm & Ponds such as: GET, PUT, DELETE, & POST.
+
+### Running Test:
+1. Open Terminal
+2. Go to this folder "Miniproject/resources"
+3. type command in your terminal this folder "go test"
 
 
