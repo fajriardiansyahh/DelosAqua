@@ -1,20 +1,40 @@
 {{ template "apps" .}}
-{{ template "content" .}}
 
 {{ define "models" }}
 
-    {{ range .Data }}
-        <h1>Farm {{ .Name }}</h1>
-        <div class="row m-0">
+    
+        <div class="row align-items-center justify-content-center m-0 p-2">
+            <div class="col"></div>
             <div class="col">
-                <img src="https://foodtank.com/wp-content/uploads/2020/04/COVID-19-Relief_Small-Farms-.jpg" height="128" class="card-img-top bg-secondary" alt="...">
-                
+                <img 
+                    src="https://foodtank.com/wp-content/uploads/2020/04/COVID-19-Relief_Small-Farms-.jpg" 
+                    height="256" 
+                    class="card-img-top bg-secondary" 
+                    alt="..." />
             </div>
-            <div class="col">
-                <h2>Description: {{ .Description }}</h2>
-                <h2>Thumbnails: {{ .Thumbnails }}</h2>
-                <h2>Created: {{ .Created_at.String }}</h2>
-            </div>
+            <div class="col"></div>
         </div>
-    {{ end }}
+        <div class="row align-items-center justify-content-center m-0 p-2">
+            <div class="col"></div>
+            <div class="col">
+
+                <div class="row">
+                    <div class="col">
+                        <h2>Farm {{ .Name }}</h2>
+                    </div>
+                    <div class="col pull-right">
+                        <button class="btn btn-sm btn-outline-success btn-view-ponds">View Ponds</button>
+                    </div>
+                </div>
+                
+                <div class="container text-wrap fw-bold">
+                    <h3>Description: {{ .Description }}</h3>
+                    <h3>Thumbnails: {{ .Thumbnails }}</h3>
+                    <h3>Created: {{ .Created_at.String }}</h3>
+                    
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+    
 {{ end }}

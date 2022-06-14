@@ -143,6 +143,7 @@ func Ponds_API(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// A function to get analytic about API
 func APIAnalyst_API(w http.ResponseWriter, r *http.Request) {
 	helpers.API_Handler(w, r)
 	models.Create_API(r.Method, r.URL.Path+r.URL.RawQuery, r.Host, r.UserAgent(), w)

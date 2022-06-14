@@ -43,6 +43,7 @@ func Farms_view(w http.ResponseWriter, r *http.Request) {
 	id := r.URL.Query().Get("id")
 	if id == "" {
 		http.NotFound(w, r)
+		return
 	}
 	val_id, err := strconv.Atoi(id)
 	if err != nil {
@@ -58,8 +59,13 @@ func Farms_view(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	data := models.GetFarm_ID(w, val_id)
+	if len(data.Data) < 1 {
+		log.Println(http.StatusNotFound)
+		http.NotFound(w, r)
+		return
+	}
 
-	err_view := template.Execute(w, structs.Map(data))
+	err_view := template.Execute(w, data.Data)
 	if err_view != nil {
 		log.Println(err_view.Error())
 		http.Error(w, err_view.Error(), http.StatusInternalServerError)

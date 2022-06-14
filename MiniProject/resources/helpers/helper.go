@@ -6,15 +6,17 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"time"
 
 	_ "github.com/go-sql-driver/mysql" // An external package for handling mysql
+	"github.com/joho/godotenv"         // An external package for get .env file variables
 )
 
 // Connection function to connect the application into the Database
 func Connection(w http.ResponseWriter) (*sql.DB, error) {
 
-	connection, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/delosaqua")
+	connection, err := sql.Open(load_Env(".env", "DATABASE_DRIVER"), load_Env(".env", "DATABASE_USERNAME")+":@"+load_Env(".env", "DATABASE_CONNECTION")+"("+load_Env(".env", "DATABASE_URL")+load_Env(".env", "DATABASE_PORT")+")/"+load_Env(".env", "DATABASE_NAME"))
 	if err != nil {
 		log.Println(err)
 		jsonResp, err_rsp := json.Marshal(err)
@@ -34,6 +36,7 @@ func Connection(w http.ResponseWriter) (*sql.DB, error) {
 	return connection, nil
 }
 
+// A helper to setup API Call
 func API_Handler(w http.ResponseWriter, r *http.Request) {
 	log.Println(r.URL.Path + r.URL.RawQuery)
 	w.Header().Set("Content-Type", "application/json")
@@ -48,6 +51,7 @@ func API_Handler(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 }
 
+// A helper to set an api responses
 func API_Responses(data any, w http.ResponseWriter, r *http.Request) {
 	jsonResp, err := json.Marshal(data)
 	if err != nil {
@@ -57,4 +61,15 @@ func API_Responses(data any, w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Write(jsonResp)
+}
+
+// a local function as a helper to loading .env File with .env file name and key as a parameter and returning value of the key
+func load_Env(file string, key string) string {
+	err := godotenv.Load(file)
+	if err != nil {
+		panic(err)
+	}
+	val := os.Getenv(key)
+
+	return val
 }

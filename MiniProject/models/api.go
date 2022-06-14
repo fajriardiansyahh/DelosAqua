@@ -141,7 +141,7 @@ func GetAPI_All(w http.ResponseWriter) Response_APIAnalyst {
 	w.WriteHeader(http.StatusOK)
 	return Response_APIAnalyst{
 		Status:  http.StatusOK,
-		Message: "GetAPI_All",
+		Message: "GetAPIAnalyst_All",
 		Data:    result,
 	}
 }

@@ -485,7 +485,7 @@
 
             {
                 "Status": 200,
-                "Message": "GetAPI_All",
+                "Message": "GetAPIAnalyst_All",
                 "Data": [
                     {
                         "Method": "DELETE",

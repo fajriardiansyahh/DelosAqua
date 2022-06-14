@@ -1,7 +1,12 @@
 {{ template "apps" .}}
 
 {{ define "content" }}
-    <h1>Models Index</h1>
-    {{ template "models" .}}
 
+    <div class="container jumbotron">
+        <h1>Models Data Details:</h1>
+        <br>
+        <hr>
+        {{ template "models" }}
+    </div>
+    
 {{ end }}
