@@ -20,4 +20,4 @@ Done
 [Mini Project](https://github.com/fajriardiansyahh/DelosAqua/tree/master/MiniProject) This is the answer folder for test with pdf document title **TECHNOLOGY-BackendTasks-200522-0638**
 
 ###Status: 
-On-going
+Done
